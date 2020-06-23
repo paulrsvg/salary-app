@@ -1,10 +1,18 @@
 <template>
 <div>
   <!-- <h1>Current Employees</h1> -->
-  <div>
   <h1>Salary Calculator</h1>
-  <form @submit.prevent="addEmployee">
+  <div class = "input">
   
+  <form @submit.prevent="checkForm">
+  
+    <p v-if="errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+      </ul>
+    </p>
+
     <label> Full Name:
       <input v-model="name" placeholder="Name">
     </label><br>
@@ -21,7 +29,7 @@
       <input v-model="phone" placeholder="Phone">
     </label><br>
     <label>Salary:
-      <input v-model="salary" type="number" min="10000" placeholder="Salary">
+      <input v-model="salary" placeholder="Salary">
     </label><br>
     <label>Currently Employed:
       <input v-model="status" type="checkbox" > 
@@ -38,32 +46,28 @@
   
     <hr>
   <!-- <div v-if="employees" class="results"> -->
-    <div  class="results">
+    <div v-if="employee.name" class="results">
   <!-- <div v-for="employee in employees" v-bind:key="employee.id" class="results"> -->
 
-    <business-card :employee="employee" />
-    <salary-table :employee="employee"/>
-
-
-    <div class="employee">
-      <div class="title">
-        <p>{{employee.title}}</p>
-        <p><i>-- {{employee.name}}</i></p>
-
-        <button @click="deleteEmployee(employee)">Delete</button>
-      </div>
-      
-    </div>
-    
+      <business-card :employee="employee" />
+      <salary-table :employee="employee"/>
   </div>
 </div>
 </template>
 
 <style scoped>
+form label {
+   display: flex;
+  align-items: left;
+  flex-direction: column;
+  width: 200px;
+  
+}
+/* 
 .results {
 display: flex;
 flex-direction: flex-row;
-}
+} */
 </style>
 
 <script>
@@ -83,7 +87,8 @@ export default {
       phone: '',
       salary: '',
       status: '',
-      employee: [],
+      employee: {},
+      errors: [],
     }
   },
   components: {
@@ -94,9 +99,7 @@ export default {
     this.getEmployee();
   },
   methods: {
-    toggleForm() {
-      //this.creating = !this.creating;
-    },
+    
     async getEmployee() {
       try {
         let response = await axios.get("/api/employee");
@@ -131,6 +134,40 @@ export default {
         return true;
       } catch (error) {
         console.log(error);
+      }
+    },
+    checkForm: function () {
+      this.errors = [];
+
+      if (!this.name) {
+        this.errors.push('Name required.');
+      }
+      if (!this.salary) {
+        this.errors.push('Salary required.');
+      } else if (!this.validSalary(this.salary)){
+        this.errors.push('Valid salary required(e.g. $85,000.99).');
+      }
+      if (!this.errors.length) {
+        this.addEmployee();
+        return true;
+      }
+    },
+
+    validSalary: function (salary) {
+      let tmp = salary;
+      tmp = tmp.replace(/[$,/,]/g,'');
+      tmp = Number(tmp);
+      if(tmp > 10000){
+        //salary regex for optional chars [$,.]
+        var re = /^(\$?)+\d{1,3}(?:,?\d{3})(?:\.\d{0,2})?/;
+        if(re.test(salary)){
+          //salary = tmp; // clean it before submit?
+          //return re.test(salary);
+          return true;
+        }
+        
+      } else {
+        this.errors.push('Salary should be greater than $10,000.');
       }
     }
   }

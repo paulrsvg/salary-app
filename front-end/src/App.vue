@@ -18,6 +18,12 @@ body {
   margin: 0px;
 }
 
+ .results{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
+    grid-gap: 1rem;
+    /* text-align: center !important; */
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -46,6 +52,6 @@ body {
 }
 
 .content {
-  padding: 10px 100px;
+  padding: 1em 2em;
 }
 </style>

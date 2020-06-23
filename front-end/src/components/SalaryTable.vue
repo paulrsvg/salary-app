@@ -15,9 +15,9 @@
     <tbody>
         <tr>
             <td>${{employee.baseSalary}}</td>
-            <td>$XX,XXX.XX - {{employee.WCSalary}}</td>
-            <td>$XX,XXX.XX - {{employee.MWSalary}}</td>
-            <td>$XX,XXX.XX - {{employee.ECSalary}}</td>
+            <td>${{employee.WCSalary}}</td>
+            <td>${{employee.MWSalary}}</td>
+            <td>${{employee.ECSalary}}</td>
         </tr>
     </tbody>
 	</table>
@@ -28,7 +28,7 @@
 export default {
   name: 'SalaryTable',
   props: {
-    employee: Array
+    employee: Object
   },
   methods: {
 
@@ -43,11 +43,11 @@ export default {
 <style scoped>
 /* scoped styles only affect this component */
 .wrapper{
-    width: 40%;
+    
     margin-top: 2em;
 }
 table.salary {
-	
+	min-width: 25em;
 	border-collapse: collapse;
 }
 table.salary caption {

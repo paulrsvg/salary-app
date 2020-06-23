@@ -9,7 +9,7 @@ app.use(express.static('public')); //serv files in public dir
 //no db needed yet so store data in global var
 //let employees = [];
 //let id = 0;
-let employee = [];
+let employee = {};
 
 
 
@@ -28,16 +28,35 @@ app.post('/api/employee', (req, res) => { //creates one employee
         manager: req.body.manager,
         company: req.body.company, 
         phone: req.body.phone,
-        baseSalary: req.body.salary, //perhaps add salary calc here
-        WCSalary: req.body.salary * 0.6,
-        MWSalary: req.body.salary * 1.2,
-        ECSalary: req.body.salary * 0.8,
+        baseSalary: {toUSD(toNum(req.body.salary);}, //perhaps add salary calc here
+        WCSalary: {toUSD(toNum(req.body.salary) * 0.6);},
+        MWSalary: {toUSD(toNum(req.body.salary) * 1.2);},
+        ECSalary: {toUSD(toNum(req.body.salary) * 0.8);},
 
         employmentStatus: req.body.status,
     };
     employee = data; //prev employees.push(employee);
     res.send(employee);
 });
+
+function toNum(salary){ //convert salary str to num
+    let tmp = salary;
+    tmp = tmp.replace(/[$,/,]/g,'');
+    return Number(tmp);
+}
+
+function toUSD(salary){ //convert salary num back to str
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+    });
+    return formatter.format(salary);
+}
+
+
+
+
 
 // app.delete('/api/employees/:id', (req, res) => {
 //     let id = parseInt(req.params.id);
