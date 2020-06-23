@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <div class="header">
-    <h1>Salary Calculator</h1>
+    <!-- <h1>Salary Calculator</h1> -->
     
     <div id="nav">
       <router-link to="/">Home</router-link>

@@ -22,7 +22,7 @@ app.get('/api/employee', (req, res) => { //grabs all employees
 app.post('/api/employee', (req, res) => { //creates one employee
     //id = id + 1; 
     let data = { //prev let employee = {
-        id : id,
+        //id : id,
         name: req.body.name,
         title: req.body.title,
         manager: req.body.manager,

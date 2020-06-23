@@ -2,7 +2,7 @@
 <div>
   <!-- <h1>Current Employees</h1> -->
   <div>
-  <h1>Calculate Employee Salary</h1>
+  <h1>Salary Calculator</h1>
   <form @submit.prevent="addEmployee">
   
     <label> Full Name:
@@ -38,8 +38,8 @@
   
     <hr>
   <!-- <div v-if="employees" class="results"> -->
-    <div v-for="employee in employees" v-bind:key="employee.id" class="results">
-  
+    <div  class="results">
+  <!-- <div v-for="employee in employees" v-bind:key="employee.id" class="results"> -->
 
     <business-card :employee="employee" />
     <salary-table :employee="employee"/>
@@ -83,7 +83,7 @@ export default {
       phone: '',
       salary: '',
       status: '',
-      employees: [],
+      employee: [],
     }
   },
   components: {
@@ -91,16 +91,16 @@ export default {
     SalaryTable,
   },
   created() {
-    this.getEmployees();
+    this.getEmployee();
   },
   methods: {
     toggleForm() {
       //this.creating = !this.creating;
     },
-    async getEmployees() {
+    async getEmployee() {
       try {
-        let response = await axios.get("/api/employees");
-        this.employees = response.data;
+        let response = await axios.get("/api/employee");
+        this.employee = response.data;
         return true;
       } catch (error) {
         console.log(error);
@@ -108,7 +108,7 @@ export default {
     },
     async addEmployee() {
       try {
-        await axios.post("/api/employees", {
+        await axios.post("/api/employee", {
           name: this.name,
           title: this.title,
           manager: this.manager,
@@ -118,7 +118,7 @@ export default {
           status: this.status
         });
         //this.creating = false;
-        this.getEmployees();
+        this.getEmployee();
         return true;
       } catch (error) {
         console.log(error);
@@ -126,8 +126,8 @@ export default {
     },
     async deleteEmployee(employee) {
       try {
-        await axios.delete("/api/employees/" + employee.id);
-        this.getEmployees();
+        await axios.delete("/api/employee/" + employee.id);
+        this.getemployee();
         return true;
       } catch (error) {
         console.log(error);
