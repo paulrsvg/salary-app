@@ -34,6 +34,9 @@ export default {
 
   }
 }
+//write script to flip numbers to the $USD currencyformat
+//console.log(new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number));
+
 </script>
 
 

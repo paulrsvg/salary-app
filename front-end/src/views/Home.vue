@@ -21,10 +21,10 @@
       <input v-model="phone" placeholder="Phone">
     </label><br>
     <label>Salary:
-      <input v-model="salary" placeholder="Salary">
+      <input v-model="salary" type="number" min="10000" placeholder="Salary">
     </label><br>
     <label>Currently Employed:
-      <input v-model="status" type="checkbox" value="1" > 
+      <input v-model="status" type="checkbox" > 
       
     </label>
 

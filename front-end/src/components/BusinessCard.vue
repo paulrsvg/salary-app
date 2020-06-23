@@ -4,8 +4,8 @@
         <h3>{{employee.name.toUpperCase()}}</h3>
         <hr>
         <p><em>{{employee.title}}</em></p>
-        <p><strong>{{employee.company}}</strong> | <span>{{employee.phone}}</span></p>
-        
+        <p><strong>{{employee.company}}</strong> | 
+        <span>{{employee.phone.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3')}}</span></p>
     </div>
 </div>
 </template>
@@ -16,8 +16,8 @@ export default {
   props: {
     employee: Array
   },
-  methods: {
-
+  computed: {
+      
   }
 }
 </script>
