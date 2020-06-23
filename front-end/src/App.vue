@@ -4,9 +4,7 @@
     <h1>Salary Calculator</h1>
     
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/create">Submit Salary</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>
     </div>
   </div>
   <div class="content">
