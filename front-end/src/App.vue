@@ -20,12 +20,14 @@ body {
 
  .results{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(410px, 1fr));
-    grid-gap: 1rem;
+    /* grid-template-columns: repeat(auto-fit, minmax(410px, 1fr)); */
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));;
+    grid-gap: 1.2rem;
     /* text-align: center !important; */
 }
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -33,7 +35,7 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  background: #571845;
+  background: #182c57;
   padding: 10px 100px;
   color: white;
 }
@@ -48,7 +50,7 @@ body {
 }
 
 #nav a.router-link-exact-active {
-  color: #FFC300;
+  color: rgb(250, 250, 250);
 }
 
 .content {

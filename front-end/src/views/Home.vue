@@ -1,6 +1,5 @@
 <template>
 <div>
-  <!-- <h1>Current Employees</h1> -->
   <h1>Salary Calculator</h1>
   <div class = "input">
   
@@ -27,8 +26,6 @@
       <input v-model="status" type="checkbox" > 
       
     </label>
-
-    <!-- work on validation here tho! -->
     <p></p>
     <p v-if="errors.length">
       <b>Please correct the following error(s):</b>
@@ -41,9 +38,7 @@
   </form>
 </div>
 
-  
     <hr>
-  <!-- <div v-if="employees" class="results"> -->
     <div v-if="employee.name" class="results">
   <!-- <div v-for="employee in employees" v-bind:key="employee.id" class="results"> -->
 

@@ -26,7 +26,7 @@ export default {
 <style scoped>
 /* scoped styles only affect this component */
 .wrapper{
-     max-width: 30em;
+     max-width: 27em;
 }
 .card {
   border: 2px solid black;  

@@ -30,25 +30,19 @@ export default {
   props: {
     employee: Object
   },
-  methods: {
-
-  }
 }
-//write script to flip numbers to the $USD currencyformat
-//console.log(new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number));
-
 </script>
 
 
 <style scoped>
-/* scoped styles only affect this component */
 .wrapper{
     
     margin-top: 2em;
 }
 table.salary {
-	min-width: 25em;
+	min-width: 30em;
 	border-collapse: collapse;
+    border: 1px solid
 }
 table.salary caption {
 	background-color: ActiveCaption;
@@ -59,6 +53,9 @@ table.salary caption {
 table.salary thead th {
 	text-align: right;
 	border-bottom: 2px solid #000;
+}
+th , td {
+    border-right: 2px solid black;
 }
 table.salary tbody {
 	background-color: #eeeeee;
