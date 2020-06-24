@@ -5,14 +5,6 @@
   <div class = "input">
   
   <form @submit.prevent="checkForm">
-  
-    <p v-if="errors.length">
-      <b>Please correct the following error(s):</b>
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-    </p>
-
     <label> Full Name:
       <input v-model="name" placeholder="Name">
     </label><br>
@@ -38,6 +30,12 @@
 
     <!-- work on validation here tho! -->
     <p></p>
+    <p v-if="errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+      </ul>
+    </p>
     <br />
     <button type="submit">Process Info</button>
   </form>
@@ -96,7 +94,7 @@ export default {
     SalaryTable,
   },
   created() {
-    this.getEmployee();
+    //this.getEmployee();
   },
   methods: {
     
@@ -130,7 +128,7 @@ export default {
     async deleteEmployee(employee) {
       try {
         await axios.delete("/api/employee/" + employee.id);
-        this.getemployee();
+        this.getEmployee();
         return true;
       } catch (error) {
         console.log(error);
@@ -145,7 +143,7 @@ export default {
       if (!this.salary) {
         this.errors.push('Salary required.');
       } else if (!this.validSalary(this.salary)){
-        this.errors.push('Valid salary required(e.g. $85,000.99).');
+        this.errors.push('Valid salary required(e.g. $85,000.00).');
       }
       if (!this.errors.length) {
         this.addEmployee();

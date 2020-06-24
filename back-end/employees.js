@@ -12,8 +12,35 @@ app.use(express.static('public')); //serv files in public dir
 let employee = {};
 
 
+var currencyCalc = function (req, res, next) {
+    function toUSD(salary){ //convert salary num back to str
+        var formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
+        return formatter.format(salary);
+    }
 
-app.get('/api/employee', (req, res) => { //grabs all employees
+    let tmp = req.body.salary;
+    if(tmp){
+        tmp = tmp.replace(/[$,/,]/g,'');
+        tmp = Number(tmp); //convert to num
+        req.WCsalary = toUSD(tmp * 0.6);
+        req.MWsalary = toUSD(tmp * 1.2);
+        req.ECsalary = toUSD(tmp * 0.8);
+        req.body.salary = toUSD(tmp);
+    }
+    
+    
+    next()
+  }
+
+  
+  app.use(currencyCalc);
+
+
+app.get('/api/employee', (req, res) => { //grabs all employee data
+    //employee.salary.currencyCalc;
     res.send(employee);
 });
 
@@ -28,31 +55,19 @@ app.post('/api/employee', (req, res) => { //creates one employee
         manager: req.body.manager,
         company: req.body.company, 
         phone: req.body.phone,
-        baseSalary: {toUSD(toNum(req.body.salary);}, //perhaps add salary calc here
-        WCSalary: {toUSD(toNum(req.body.salary) * 0.6);},
-        MWSalary: {toUSD(toNum(req.body.salary) * 1.2);},
-        ECSalary: {toUSD(toNum(req.body.salary) * 0.8);},
+        baseSalary: req.body.salary, //perhaps add salary calc here as middleware
+        WCSalary: req.WCsalary,
+        MWSalary: req.MWsalary,
+        ECSalary: req.ECsalary,
 
         employmentStatus: req.body.status,
+        id: req.currencyCalc, //dummy var to run middleware on data
     };
     employee = data; //prev employees.push(employee);
+    //employee.salary.currencyCalc;
     res.send(employee);
 });
 
-function toNum(salary){ //convert salary str to num
-    let tmp = salary;
-    tmp = tmp.replace(/[$,/,]/g,'');
-    return Number(tmp);
-}
-
-function toUSD(salary){ //convert salary num back to str
-    var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 0
-    });
-    return formatter.format(salary);
-}
 
 
 

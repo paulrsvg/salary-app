@@ -14,10 +14,10 @@
     </thead>
     <tbody>
         <tr>
-            <td>${{employee.baseSalary}}</td>
-            <td>${{employee.WCSalary}}</td>
-            <td>${{employee.MWSalary}}</td>
-            <td>${{employee.ECSalary}}</td>
+            <td>{{employee.baseSalary}}</td>
+            <td>{{employee.WCSalary}}</td>
+            <td>{{employee.MWSalary}}</td>
+            <td>{{employee.ECSalary}}</td>
         </tr>
     </tbody>
 	</table>
